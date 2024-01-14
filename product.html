@@ -1,0 +1,190 @@
+<html>
+<head>
+    <title>Product</title>
+    <style>
+        h2 {
+            font-family: Sans-serif;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: bold;
+            color:black;
+            text-align: center;
+        }
+        table {
+            font-family: verdana;
+            color: white;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: bold;
+            /* background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%); */
+            background:cornflowerblue;
+            border-collapse: collapse;
+            border: 4px solid #000000;
+        }
+        table.inner {
+            border: 10px
+        }
+        input[type=text],
+        input[type=email],
+        input[type=number] {
+            width: 50%;
+            padding: 6px 12px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        input[type=submit],
+        input[type=reset],
+        input[type=button] {
+            width: 15%;
+            padding: 8px 12px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<script>
+    function savedata(){
+        var product_name = document.getElementById("product_name").value;
+        var product_id = document.getElementById("product_id").value;
+        var product_type = document.getElementById("product_type").value;
+        var price = document.getElementById("price").value;
+        var quantity = document.getElementById("quantity").value;
+        var address = document.getElementById("address").value;
+        var mfgdate = document.getElementById("mfgdate").value;
+        var exdate = document.getElementById("exdate").value;
+        var mfgcity = document.getElementById("mfgcity").value;
+        var mfgcountry = document.getElementById("mfgcountry").value;
+
+        //alert(uname + " " + pwd);
+        fetch(" http://localhost:3000/data",{
+            method:"POST",
+            body:JSON.stringify({product_name:product_name,product_id:product_id,product_type:product_type,price:price,quantity:quantity,address:address,mfgdate:mfgdate,exdate:exdate,mfgcity:mfgcity,mfgcountry:mfgcountry}),
+            headers:{"Content-Type":"application/json"}
+        })
+        .then(response => response.json())
+        .then(json => {
+           alert("Data Submitted Successfully")
+            //location.replace("./login.html")
+        })
+    }
+
+    async function getProducts(){
+     const resp = await fetch('http://localhost:3000/Product');
+     var data = await resp.json();
+     console.log(data);
+     let tab = `<tr> 
+                <th> Product Name </th>
+                <th> Product ID </th>
+                <th> Product Type </th>
+                <th> Price </th>
+                <th> Qunatity </th>
+                <th>  Delivery Address </th>  
+                <th> Manufacturing Date </th>
+                <th> Expiry Date </th>
+                <th> Manufacturing City </th>  
+                <th> Manufacturing Country </th>                   
+                 
+                </tr>`;
+                for( let p of data){
+                 tab += `<tr> 
+                         <td>${p.product_name}</td>
+                         <td>${p.product_id}</td>
+                         <td>${p.product_type}</td>
+                         <td>${p.price}</td>
+                         <td>${p.quantity}</td>
+                         <td>${p.address}</td>   
+                         <td>${p.mfgdate}</td>
+                         <td>${p.exdate}</td>
+                         <td>${p.mfgcity}</td>
+                         <td>${p.mfgcountry}</td>                                                     
+                     </tr>`
+                }
+                document.getElementById("product-table").innerHTML = tab;
+ }
+    async function click(){
+        window.location.href="Product_List.html";
+
+    }
+</script>
+<body>
+    <h2>Product Information</h3>
+        
+        <table align="center" cellpadding="10">
+            <tr>
+                <td>Product Name</td>
+                <td><input type="text" name="product_name" maxlength="50" placeholder="Product Name" id="product_name" />
+                    (Max 50 Characters Allowed)
+
+                </td>
+            </tr>
+            <tr>
+                <td>Product ID</td>
+                <td><input type="text" name="product_id" maxlength="50" placeholder="Product ID" id="product_id"/>
+                    (Max 50 Characters Allowed)
+                </td>
+            </tr>
+            <tr>
+                <td>Product Type</td>
+                <td><input type="text" name="product_type" maxlength="100" placeholder="Product Type" id="product_type" /></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="text" name="price" maxlength="10" placeholder="Enter Price" id="price" />
+                    (10 Digits Allowed)
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Quantity</td>
+                <td>
+                    <input type="text" name="quantity" maxlength="10" placeholder="Enter Quantity" id="quantity" />
+                    (10 Digits Allowed)
+                </td>
+            </tr>
+            <tr>
+                <td> Delivery Address<br /><br /><br /></td>
+                <td><textarea name="address" rows="10" cols="50" id="address"></textarea></td>
+            </tr>
+            
+            <tr>
+                <td>Manufacturing Date</td>
+                <td><input type="text" name="mfgdate" maxlength="50" placeholder="Enter Manufacturing Date" id="mfgdate" />
+                    (Max 50 Characters Allowed)
+                </td>
+            </tr>
+
+            <tr>
+                <td>Expiry Date</td>
+                <td><input type="text" name="exdate" maxlength="50" placeholder="Enter Expiry Date" id="exdate" />
+                    (Max 50 Characters Allowed)
+                </td>
+            </tr>
+            
+            </tr>
+            <tr>
+                <td>Manufacturing City</td>
+                <td><input type="text" name="mfgcity" maxlength="50" placeholder="Enter Manufacturing City" id="mfgcity" />
+                    (Max 50 Characters Allowed)
+                </td>
+            </tr>
+            <tr>
+                <td>Manufacturing Country</td>
+                <td><input type="text" name="mfgcountry" placeholder="Enter Manufacturing Country" id="mfgcountry"/></td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit" onclick="savedata()">
+                    <input type="reset" value="Reset">
+                    <!--<input type="button" value="Product List" onclick="{click()}; {getProducts()};">-->
+                    <input type="button" value="Product List" onclick="window.location.href='Product_List.html';">
+
+                
+                </td>
+            </tr>
+        </table>
+        </form>
+        
+</body>
+</html>

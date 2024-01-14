@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "product_name": "HP",
+      "product_id": "123",
+      "product_type": "Electronics",
+      "price": "50000",
+      "quantity": "1",
+      "address": "Pune",
+      "mfgdate": "Abc@gmail.com",
+      "exdate": "1234567890",
+      "mfgcity": "123456",
+      "mfgcountry": "123456"
+    },
+    {
+      "product_name": "Mirror",
+      "product_id": "02",
+      "product_type": "Home Appliances",
+      "price": "5000",
+      "quantity": "10",
+      "address": "pune",
+      "mfgdate": "20/2/2023",
+      "exdate": "22/05/2024",
+      "mfgcity": "Mumbai",
+      "mfgcountry": "India",
+      "id": 2
+    },
+    {
+      "product_name": "Iphone",
+      "product_id": "03",
+      "product_type": "electronics",
+      "price": "140000",
+      "quantity": "1",
+      "address": "pune",
+      "mfgdate": "20/2/2023",
+      "exdate": "25/5/2035",
+      "mfgcity": "Delhi",
+      "mfgcountry": "India",
+      "id": 3
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(70, 128, 0);
+    color: white;
+}
+
+li{
+    display: inline;
+    padding: 20px;
+}
+
+#logout{
+    float: right;
+}
+
+#home-div{
+    margin-left: 60px;
+}
+
+li a{
+    color: white;
+}

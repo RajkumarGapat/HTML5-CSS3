@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./login.css"/>
+</head>
+<script>
+    function saveUser(){
+        var uname = document.getElementById("username").value;
+        var pwd = document.getElementById("pwd").value;
+        var regName = /\d+$/g;
+
+      if (uname == "" || regName.test(uname)) {
+        window.alert("Please enter valid Username.");
+        uname.focus();
+        return false;
+      }
+
+        if (pwd.length < 6) {
+        window.alert("Password should be at least 6 characters.");
+        pwd.focus();
+        return false;
+      }
+        // alert(uname +" "+ pwd);
+        fetch(" http://localhost:3000/users",{
+            method:"POST",
+            body:JSON.stringify({username:uname,password:pwd}),
+            headers:{"Content-Type":"application/json"}
+        })
+        .then(response => response.json())
+        .then(json => {
+                       alert("User Created Successfully");
+                    });
+    }
+
+</script>
+<body>
+    <div id="login-div">
+        <h2> Sign Up </h2>
+        Username: <input type="text" id="username"/> <br/>  <br/>
+        Password: <input type="password" id="pwd"/> <br/> <br/>
+        <input type="submit" value="Sign Up" onclick="saveUser()" />
+        <button> Cancel</button> <br /> <br />
+        <a href="login2.html"> Already Registered?? Login </a>
+    </div>
+</body>
+</html>
